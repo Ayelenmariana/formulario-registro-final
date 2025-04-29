@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Lelatad</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #fefefe, #e6f8f5);
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #006b5f;
+      margin-bottom: 1rem;
+    }
+    .progress-bar {
+      height: 10px;
+      background: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f1c40f, #1abc9c);
+      transition: width 0.3s ease-in-out;
+    }
+    .form-step {
+      display: none;
+    }
+    .form-step.active {
+      display: block;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      margin-top: 0.3rem;
+    }
+    input:invalid {
+      border-color: red;
+    }
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 0.7rem 1.5rem;
+      background: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #16a085;
+    }
+    .hidden {
+      display: none;
+    }
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .success-screen {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📝 Registro de Comercio – ¡Sumate a nuestro programa Integral de Lelatad!</h2>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+
+    <form id="formulario">
+      <!-- PANTALLA 1 -->
+      <div class="form-step active">
+        <label>Nombre y apellido *</label>
+        <input type="text" name="nombre" required>
+
+        <label>DNI *</label>
+        <input type="text" name="dni" required>
+
+        <label>Cargo o relación con el comercio</label>
+        <input type="text" name="cargo">
+
+        <label>Teléfono o WhatsApp *</label>
+        <input type="tel" name="telefono" required>
+
+        <label>Correo electrónico *</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <!-- PANTALLA 2 -->
+      <div class="form-step">
+        <label>Nombre de fantasía *</label>
+        <input type="text" name="fantasia" required>
+
+        <label>CUIT *</label>
+        <input type="text" name="cuit" required>
+
+        <label>Razón social *</label>
+        <input type="text" name="razon" required>
+
+        <label>Rubro / Categoría *</label>
+        <select name="rubro" required>
+          <option value="">Seleccione una opción</option>
+          <option value="Alimentos">Alimentos</option>
+          <option value="Ropa">Ropa</option>
+          <option value="Tecnología">Tecnología</option>
+          <option value="Otro">Otro</option>
+        </select>
+
+        <label>Otro - Descripción</label>
+        <input type="text" name="rubro_otro">
+
+        <label>Constancia de inscripción AFIP (PDF) *</label>
+        <input type="file" name="afip" accept=".pdf" required>
+
+        <label>Foto del local o comercio *</label>
+        <input type="file" name="foto_local" accept=".jpg, .jpeg, .png" required title="Te recomendamos subir imágenes claras, donde se vea bien la fachada o el espacio del local">
+
+        <label><input type="checkbox" required> Acepto los Términos del Servicio y la Política de Privacidad.</label>
+      </div>
+
+      <!-- PANTALLA 3 -->
+      <div class="form-step">
+        <label>¿Cómo operás actualmente? *</label>
+        <label><input type="radio" name="canal" value="fisico" required> Solo en un local físico</label>
+        <label><input type="radio" name="canal" value="online"> Solo online</label>
+        <label><input type="radio" name="canal" value="ambos"> Ambos canales</label>
+      </div>
+
+      <!-- PANTALLA 4 -->
+      <div class="form-step">
+        <label>Provincia *</label>
+        <input type="text" name="provincia" required>
+
+        <label>Partido *</label>
+        <input type="text" name="partido" required>
+
+        <label>Localidad *</label>
+        <input type="text" name="localidad" required>
+
+        <label>Calle *</label>
+        <input type="text" name="calle" required>
+
+        <label>Número *</label>
+        <input type="text" name="numero" required>
+
+        <label>Descripción adicional</label>
+        <input type="text" name="descripcion">
+
+        <label>Días y horarios de atención</label>
+        <input type="text" name="horarios">
+
+        <label>Barrio / Comuna / CP / Lat / Long</label>
+        <input type="text" name="geo">
+
+        <label><input type="checkbox"> Sin validar</label>
+
+        <label>Red Social o URL (opcional)</label>
+        <input type="url" name="url">
+
+        <label>Métodos de pago aceptados *</label>
+        <select name="pagos" required>
+          <option value="">Seleccione</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Tarjetas">Tarjetas de crédito</option>
+        </select>
+      </div>
+
+      <!-- PANTALLA 5 -->
+      <div class="form-step">
+        <label>¿Tenés más de una sucursal que quieras asociar? *</label>
+        <label><input type="radio" name="sucursal" value="si" required> Sí</label>
+        <label><input type="radio" name="sucursal" value="no"> No</label>
+      </div>
+
+      <!-- PANTALLA 6 -->
+      <div class="form-step">
+        <label>Logo del comercio</label>
+        <input type="file" name="logo" accept=".jpg,.jpeg,.png">
+
+        <label>Imagen de portada o banner</label>
+        <input type="file" name="banner" accept=".jpg,.jpeg,.png">
+
+        <label>Frase destacada o slogan</label>
+        <input type="text" name="slogan">
+
+        <label>Hasta 3 fotos del local/productos</label>
+        <input type="file" name="fotos[]" multiple accept=".jpg,.jpeg,.png">
+
+        <label>Descripción breve del comercio</label>
+        <textarea name="descripcion_breve" maxlength="300"></textarea>
+      </div>
+
+      <!-- PANTALLA 7 -->
+      <div class="form-step">
+        <label>Contraseña *</label>
+        <input type="password" name="pass" required title="Generar clave de mínimo 8 caracteres, debe contener una mayúscula, números">
+
+        <label>Confirmar contraseña *</label>
+        <input type="password" name="confirm_pass" required>
+
+        <label>Recuperación por e-mail o WhatsApp *</label>
+        <input type="text" name="recuperacion" required>
+      </div>
+
+      <div class="buttons">
+        <button type="button" id="prevBtn" onclick="prevStep()">Anterior</button>
+        <button type="button" id="nextBtn" onclick="nextStep()">Siguiente</button>
+      </div>
+    </form>
+
+    <div id="finalScreen" class="hidden success-screen">
+      <h2>🎉 ¡Registro realizado con Éxito!</h2>
+      <p>Te llegará un mail de confirmación, revisá el correo que registraste.</p>
+      <button onclick="window.location.href='promociones.html'">👉 Cargar promoción</button>
+      <button onclick="window.location.href='index.html'">🏠 Volver al inicio</button>
+    </div>
+
+    <canvas class="confetti hidden" id="confettiCanvas"></canvas>
+  </div>
+
+  <script>
+    const steps = document.querySelectorAll('.form-step');
+    const progress = document.getElementById('progress');
+    let currentStep = 0;
+
+    function showStep(index) {
+      steps.forEach((step, i) => {
+        step.classList.toggle('active', i === index);
+      });
+      const progressPercent = ((index) / (steps.length - 1)) * 100;
+      progress.style.width = progressPercent + '%';
+
+      document.getElementById('prevBtn').style.display = index === 0 ? 'none' : 'inline-block';
+      document.getElementById('nextBtn').textContent = index === steps.length - 1 ? 'Enviar' : 'Siguiente';
+    }
+
+    function validateStep() {
+      const inputs = steps[currentStep].querySelectorAll('input, select, textarea');
+      for (let input of inputs) {
+        if (!input.checkValidity()) {
+          input.classList.add('invalid');
+          input.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function nextStep() {
+      if (!validateStep()) return;
+
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        document.getElementById('formulario').classList.add('hidden');
+        document.getElementById('finalScreen').classList.remove('hidden');
+        launchConfetti();
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+
+    function launchConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      canvas.classList.remove('hidden');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const confettis = Array.from({length: 150}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 10 + 5,
+        color: `hsl(${Math.random() * 360}, 100%, 70%)`
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettis.forEach(c => {
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+          ctx.fillStyle = c.color;
+          ctx.fill();
+        });
+        update();
+      }
+
+      function update() {
+        confettis.forEach(c => {
+          c.y += Math.cos(c.d) + 2;
+          c.x += Math.sin(c.d);
+          if (c.y > canvas.height) {
+            c.y = -10;
+            c.x = Math.random() * canvas.width;
+          }
+        });
+      }
+
+      (function animate() {
+        draw();
+        requestAnimationFrame(animate);
+      })();
+    }
+
+    showStep(currentStep);
+  </script>
+</body>
+</html>
